@@ -1,4 +1,3 @@
 ## Conferencia Lasa 2025
 
-Presentación : Click here
-
+[Presentation: Click HERE](https://matdknu.github.io/lasa_2025/presentation.html)
