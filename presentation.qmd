@@ -2,7 +2,7 @@
 title: "Una radiografía a la cobertura mediática de las policías en Chile."
 subtitle: "Análisis longitudinal a partir los medios de prensa on-line (2000 – 2024)."
 author: "Matías Deneken, Matías Gomez and Ismael Puga"
-institute: Observatorio de Violencia y Legitimidad Social 
+institute: Observatorio de Violencia y Legitimidad Social (OLES)
 date: "2025-05-25"
 bibliography: bib/template.bib
 format:
@@ -46,10 +46,9 @@ pacman::p_load(
 )
 ```
 
-## Authors
+## Autores
 
-:::: {.columns .vh-center-container}
-
+::: {.columns .vh-center-container}
 ::: {.column width="33%"}
 <img src="https://oles2.netlify.app/author/matias-deneken/avatar_hu7a96b8e5b121dc5279c4d6bff5140ace_240327_270x270_fill_q75_lanczos_center.jpg"/>
 
@@ -59,11 +58,11 @@ OLES & Pontificia Universidad Católica de Chile
 :::
 
 ::: {.column width="33%"}
-<img src="https://sociologia.uc.cl/wp-content/uploads/2023/09/Matias-Gomez-Contreras.jpg"/>
+<img src="https://sociologia.uc.cl/wp-content/uploads/2023/09/Matias-Gomez-Contreras.jpg" width="270"/>
 
 **Matías Gomez**
 
-OLES,  Pontificia Universidad Católica de Chile y Universidad Central de Chile
+OLES, Pontificia Universidad Católica de Chile y Universidad Central de Chile
 :::
 
 ::: {.column width="34%"}
@@ -72,31 +71,108 @@ OLES,  Pontificia Universidad Católica de Chile y Universidad Central de Chile
 **Ismael Puga**
 
 OLES y Universidad Central de Chile
-
 :::
-
-::::
+:::
 
 ## Introducción
 
-## Marco teórico (1/3)
+Los medios de comunicación desempeñan un papel crucial en la construcción de legitimidad y percepción pública sobre las acciones de las policías.
 
-## Marco teórico (2/3)
+## Sobre el estudio
 
-## Marco teórico (3/3)
+-   Tendencias de noticias sobre carabineros en Chile (2000 - 2023).
 
-## Metodología (1/2)
+-   ¿Cómo ha evolucionado la cobertura hacia Carabineros de Chile a lo largo del tiempo?
 
-## Metodología (2/2)
+**Fuente de datos:**
 
-## Resultados (1/4)
+Portal de noticias EMOL.com
 
-## Resultados (2/4)
+## Marco teórico: Violencia y legitimidad (1/4)
 
-## Resultados (3/4)
+## Marco teórico: New Coverage (2/4)
 
-## Resultados (4/4)
+## Marco teórico: Police brutality (3/4)
+
+## Marco teórico: El estudio (4/4)
+
+## Metodología: Datos y recolección (1/3)
+
+### Fuente de datos
+
+Portal de noticias El Mercurio Online (EMOL) entre junio del año 200 hasta diciembre del año 2023.
+
+### Recolección de datos
+
+Técnica de Webscrapping que permite extraer información de manera automatizada y masiva de la información disponible en sitios web. Se utilizó el software R para llevar a cabo del proceso. Se obtuvo un total de 1.052.167 observaciones de las cuáles 51.533 incluyen mención a carabineros (5%).
+
+## Metodología: Datos y recolección (2/3)
+
+**Codificación automática: diccionario léxico**
+
+En base a la información textual podemos identificar si una noticia se encuentra o no asociada un término en particular (forma deducativa de codificación) siempre y cuándo se encuentre asociada con la palabra de carabineros.
+
+| Tema                          | Términos claves                                                                          | Sujetos asociados                                                |
+|-----------------|--------------------------------|-----------------------|
+| Delitos y crímenes comunes    | Asalto, robo, hurto, narcotráfico, homicidio, femicidio \[...\]                          | Ladrón, delincuente, homicida, agresor \[...\]                   |
+| Protestas y movilizaciones    | Disturbios, protestas, manifestaciones, estallido social, movimiento estudiantil \[...\] | Manifestantes, estudiantes, feministas, líderes sociales \[...\] |
+| Asuntos étnicos-territoriales | Conflicto indígena, macrozona sur, zona roja \[...\]                                     | Mapuche, comuneros, lonko, pueblos originarios                   |
+
+Ello nos permitirá evidenciar las tendencias de temáticas y su relación con Carabineros a lo largo del tiempo.
+
+## Metodología: Machine Learning no Supervisado (3/3).
+
+Procesamiento de Lenguaje Natural (NLP) no supervisado mediante la técnica de Topic Model en su versión de **Latent Dirichlet Allocation (LDA)**. LDA funciona asignando **tópicos probables a cada palabra**, basándose en dos ideas:
+
+1.  Cada **documento** está formado por una mezcla de temas (por ejemplo: seguridad, manifestaciones, conflicto indígena).
+
+2.  Cada **tema** está formado por un conjunto característico de palabras (por ejemplo: delincuencia, robo, ladrón para seguridad).
+
+El algoritmo **aprende patrones de co-ocurrencia** de palabras para estimar estas combinaciones: Intentamos descubrir los temas ocultos que hay en un conjunto de texto.
+
+Se usa una **fórmula de probabilidad**: $$
+P(z = k \mid w, d) \propto \frac{n_{w|k} + \beta}{n_k + V\beta} \cdot \frac{n_{k|d} + \alpha}{n_d + K\alpha}
+$$
+
+## Resultados (1/4): Proporción tendencial
+
+![](images/tendencias-carabineros.png){fig-align="center" width="489"}
+
+## Resultados (1/4):  Actores
+
+![](images/noticias_carabineros_estacional.png){fig-align="center"}
+
+## Resultados (1/4): Eventos
+
+![](images/tendecias_automática.png){fig-align="center"}
+
+## Resultados (2/4): ML - NS
+
+| **Tópico**                | **Términos clave**                                    |
+|-------------------------|-----------------------------------------------|
+| Accidentes                | accidente, vehículo, carabineros, conductor, bus      |
+| Alto riesgo               | carabineros, personal, allanamiento, droga, sector    |
+| Asistencia en catástrofes | región, valparaíso, zona, emergencia, incendio        |
+| Conflicto Mapuche         | carabineros, región, araucanía, zona, ataque          |
+| Delincuencia              | robo, sujetos, seguridad, delincuentes, comuna        |
+| Derechos Humanos          | carabineros, institución, director, derechos, humanos |
+| Drogas                    | carabineros, detención, detenidos, armas, control     |
+| Enfrentamientos balas     | hospital, carabineros, arma, víctima, disparos        |
+| Judiciales                | fiscal, fiscalía, investigación, ministerio, caso     |
+| Protestas                 | carabineros, estudiantes, marcha, incidentes, plaza   |
+| Proyectos seguridad       | gobierno, presidente, interior, seguridad, sistema    |
+| Violencia en los Estadios | colo, estadio, chile, partido, universidad            |
+
+## Resultados (2/4): ML - NS
+
+![](images/n_noticias_topics_documentadas.png){fig-align="center"}
+
+## Resultados (3/4): Tópicos
+
+![](images/topico_temporal.png){fig-align="center"}
+
+## Resultados (4/4): PCA
+
+![](images/clauster.png){fig-align="center"}
 
 ## Conclusiones
-
-
