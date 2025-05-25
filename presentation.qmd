@@ -130,7 +130,7 @@ En Chile este concepto no ha sido lo suficientemente indagado, siendo útil para
 :::
 :::
 
-## Marco teórico:  El estudio (3/3)
+## Marco teórico: El estudio (3/3)
 
 A diferencia de los estudios tradicionales sobre legitimidad policial, que se basan mayoritariamente en encuestas transversales y análisis cualitativos de noticias específicas, este estudio adopta un enfoque **computacional y longitudinal** para analizar la cobertura de prensa sobre Carabineros de Chile entre 2000 y 2023.
 
@@ -161,7 +161,7 @@ La recolección de datos se realizó mediante **técnicas de web scraping** qu
 En base a la información textual podemos identificar si una noticia se encuentra o no asociada un término en particular (forma deducativa de codificación) siempre y cuándo se encuentre asociada con la palabra de carabineros.
 
 | Tema                          | Términos claves                                                                          | Sujetos asociados                                                |
-|-------------------|------------------------------|-----------------------|
+|-------------------------------|------------------------------------------------------------------------------------------|------------------------------------------------------------------|
 | Delitos y crímenes comunes    | Asalto, robo, hurto, narcotráfico, homicidio, femicidio \[...\]                          | Ladrón, delincuente, homicida, agresor \[...\]                   |
 | Protestas y movilizaciones    | Disturbios, protestas, manifestaciones, estallido social, movimiento estudiantil \[...\] | Manifestantes, estudiantes, feministas, líderes sociales \[...\] |
 | Asuntos étnicos-territoriales | Conflicto indígena, macrozona sur, zona roja \[...\]                                     | Mapuche, comuneros, lonko, pueblos originarios                   |
@@ -196,20 +196,45 @@ $$
 
 ## Resultados (2/4): ML - NS
 
-| **Tópico**                | **Términos clave**                                    |
-|--------------------------|----------------------------------------------|
-| Accidentes                | accidente, vehículo, carabineros, conductor, bus      |
-| Alto riesgo               | carabineros, personal, allanamiento, droga, sector    |
-| Asistencia en catástrofes | región, valparaíso, zona, emergencia, incendio        |
-| Conflicto Mapuche         | carabineros, región, araucanía, zona, ataque          |
-| Delincuencia              | robo, sujetos, seguridad, delincuentes, comuna        |
-| Derechos Humanos          | carabineros, institución, director, derechos, humanos |
-| Drogas                    | carabineros, detención, detenidos, armas, control     |
-| Enfrentamientos balas     | hospital, carabineros, arma, víctima, disparos        |
-| Judiciales                | fiscal, fiscalía, investigación, ministerio, caso     |
-| Protestas                 | carabineros, estudiantes, marcha, incidentes, plaza   |
-| Proyectos seguridad       | gobierno, presidente, interior, seguridad, sistema    |
-| Violencia en los Estadios | colo, estadio, chile, partido, universidad            |
+-   <div>
+
+    ```{r, echo=FALSE, message=FALSE, warning=FALSE}
+    library(gt)
+
+    tabla_reducida <- data.frame(
+      Tópico = c("Accidentes", "Alto riesgo", "Asistencia en catástrofes", "Conflicto Mapuche",
+                 "Delincuencia", "Derechos Humanos", "Drogas", "Enfrentamientos balas",
+                 "Judiciales", "Protestas", "Proyectos seguridad", "Violencia en los Estadios"),
+      `Términos clave` = c(
+        "accidente, vehículo, carabineros, conductor, bus",
+        "carabineros, personal, allanamiento, droga, sector",
+        "región, valparaíso, zona, emergencia, incendio",
+        "carabineros, región, araucanía, zona, ataque",
+        "robo, sujetos, seguridad, delincuentes, comuna",
+        "carabineros, institución, director, derechos, humanos",
+        "carabineros, detención, detenidos, armas, control",
+        "hospital, carabineros, arma, víctima, disparos",
+        "fiscal, fiscalía, investigación, ministerio, caso",
+        "carabineros, estudiantes, marcha, incidentes, plaza",
+        "gobierno, presidente, interior, seguridad, sistema",
+        "colo, estadio, chile, partido, universidad"
+      )
+    )
+
+    tabla_reducida |>
+      gt() |>
+      tab_options(
+        table.font.size = px(25),
+        data_row.padding = px(3)
+      ) |>
+      tab_header(
+        title = md("Tópicos y palabras más relevantes del modelo de tópicos")
+      )
+
+
+    ```
+
+    </div>
 
 ## Resultados (2/4): ML - NS
 
@@ -223,4 +248,44 @@ $$
 
 ![](images/clauster.png){fig-align="center"}
 
-## Conclusiones
+## Conclusiones (1/2)
+
+::: columns
+::: {.column width="50%"}
+#### **Sobre el método**
+
+-   El scraping completo de EMOL (2000–2023) permitió analizar **+ 50.000 noticias** con mención a Carabineros.
+
+-   Se aplicaron técnicas como: Estadística descriptiva, topic modeling y análisis PCA
+
+-   Esto reveló **patrones de largo plazo** y **cambios estructurales** en el discurso mediático sobre la policía.
+
+-   Este enfoque computacional abre nuevas rutas para estudiar la **legitimidad policial**, articulando datos masivos y teoría social.
+:::
+
+::: {.column width="50%"}
+#### **Carabineros en agenda**
+
+-   Históricamente, Carabineros aparecían en el **3–5% de las noticias** anuales.
+
+-   Desde **2019**, este número se duplica hasta alcanzar un **12% en 2024**.
+
+-   Este salto coincide con eventos como el **Estallido Social** y otras **crisis institucionales**.
+
+-   Carabineros emerge como **actor central** en la narrativa mediática en el último tiempo, entrecruzado por la crisis social y aumento en percepción de inseguridad
+:::
+:::
+
+## Conclusiones (2/2)
+
+Estudios como los de *Fridkin et al.* (2017), *McLeod & Detenber* (1999) y *Dowler* (2002) demuestran que el modo en que se enmarca una noticia tiene un efecto directo en cómo se interpreta la acción policial.
+
+→ Cuando los medios utilizan marcos de **“ley y orden”**, la policía aparece como eficaz y legítima; en cambio, cuando las noticias se enmarcan en términos de **“uso excesivo de la fuerza”** se erosiona la percepción de legitimidad.
+
+**¿Cómo se expresa esto en los resultados?**
+
+→ **Tópicos como "Delincuencia", "Judiciales" o "Proyectos de seguridad"** se articulan mediante un vocabulario institucional y técnico (*"detuvo"*, *"imputado"*, *"medidas"*) que transmite efectividad y orden.
+
+→ Por el contrario, **tópicos como "Protestas", "Conflicto Mapuche" y "Derechos Humanos"** están dominados por léxicos asociados a confrontación (*"represión"*, *"incidentes"*, *"violencia"*, *"represiva"*) que refuerzan marcos de deslegitimación.
+
+→ El análisis PCA refuerza esta distinción, al mostrar una **estructura bipolar del discurso**.
